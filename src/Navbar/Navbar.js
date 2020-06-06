@@ -1,5 +1,6 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import {Grid} from '@material-ui/core';
+import {Badge} from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Icon } from '@material-ui/core';
@@ -37,10 +38,10 @@ class Navbar extends React.Component{
               </Icon>
             </Grid>
             <Grid item>
-              <Typography variant="h4" component="h1">
+              <Typography variant="h4">
                 Pizza
               </Typography>
-              <Typography variant="overline" component="h1">
+              <Typography variant="overline">
                 Delivery
               </Typography>
             </Grid>
@@ -48,7 +49,9 @@ class Navbar extends React.Component{
         </Logo>
         <NavMenu>
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon />
+            <Badge badgeContent={4} color="secondary">
+              <AddShoppingCartIcon />
+            </Badge>
           </IconButton>
         </NavMenu>
       </NavbarStyle>
