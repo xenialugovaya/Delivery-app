@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
 import { createGlobalStyle } from 'styled-components'
 import Navbar from './Navbar/Navbar';
+import Menu from './Menu/Menu';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,10 +14,7 @@ function App() {
     <>
     <GlobalStyle/>
     <Navbar/>
-    <Button variant="contained">
-      Hello
-    </Button>
-
+    <Menu/>
    </>
   );
 }
