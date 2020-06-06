@@ -1,6 +1,9 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import { IconButton } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+import { Icon } from '@material-ui/core';
+import LocalPizzaTwoToneIcon from '@material-ui/icons/LocalPizzaTwoTone';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import styled from 'styled-components'
 
@@ -27,12 +30,21 @@ class Navbar extends React.Component{
     return (
       <NavbarStyle>
         <Logo>
-          <Typography variant="h4" component="h1">
-            Pizza
-          </Typography>
-          <Typography variant="overline" component="h1">
-            Delivery
-          </Typography>
+         <Grid container spacing={2}>
+            <Grid item>
+              <Icon color="primary">
+                <LocalPizzaTwoToneIcon fontSize="large"/>
+              </Icon>
+            </Grid>
+            <Grid item>
+              <Typography variant="h4" component="h1">
+                Pizza
+              </Typography>
+              <Typography variant="overline" component="h1">
+                Delivery
+              </Typography>
+            </Grid>
+          </Grid>
         </Logo>
         <NavMenu>
           <IconButton color="primary" aria-label="add to shopping cart">
