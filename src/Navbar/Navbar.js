@@ -10,6 +10,7 @@ import styled from 'styled-components'
 
 
 const NavbarStyle = styled.div`
+  background: white;
   padding: 15px 25px;
   display: flex;
   justify-content: space-between;
