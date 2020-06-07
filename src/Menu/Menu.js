@@ -17,7 +17,7 @@ class Menu extends React.Component{
         <Typography variant="h2" component="h1">
           Menu
         </Typography>
-        <Grid container>
+        <Grid container spacing={2}>
           {pizzas.map((pizza) => {
             return(
               <Grid item>
