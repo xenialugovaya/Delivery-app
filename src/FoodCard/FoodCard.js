@@ -14,7 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 345,
   },
   media: {
     height: 0,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FoodCard(props) {
-  const {title, price, shortDescription, description, image} = props;
+  const {title, price, shortDescription, description, image} = props.parameters;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

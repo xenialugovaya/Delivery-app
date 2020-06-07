@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Grid} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-
+import FoodCard from '../FoodCard/FoodCard';
+import { pizzas } from '../Data/Data';
+ 
 
 const MenuStyle = styled.div`
 padding: 60px;
@@ -16,6 +18,13 @@ class Menu extends React.Component{
           Menu
         </Typography>
         <Grid container>
+          {pizzas.map((pizza) => {
+            return(
+              <Grid item>
+              <FoodCard  parameters={pizza}/>
+            </Grid> 
+            )
+          })}    
         </Grid>
       </MenuStyle>
     )
