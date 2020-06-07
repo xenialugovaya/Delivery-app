@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Delivery-app/static/css/main.d498bfb3.chunk.css",
-    "main.js": "/Delivery-app/static/js/main.e5b806d7.chunk.js",
-    "main.js.map": "/Delivery-app/static/js/main.e5b806d7.chunk.js.map",
+    "main.js": "/Delivery-app/static/js/main.eb62ba5d.chunk.js",
+    "main.js.map": "/Delivery-app/static/js/main.eb62ba5d.chunk.js.map",
     "runtime-main.js": "/Delivery-app/static/js/runtime-main.eb717de8.js",
     "runtime-main.js.map": "/Delivery-app/static/js/runtime-main.eb717de8.js.map",
     "static/js/2.69db8bf7.chunk.js": "/Delivery-app/static/js/2.69db8bf7.chunk.js",
     "static/js/2.69db8bf7.chunk.js.map": "/Delivery-app/static/js/2.69db8bf7.chunk.js.map",
     "index.html": "/Delivery-app/index.html",
-    "precache-manifest.6aee55672100ac63346f0a57a0c7f4ca.js": "/Delivery-app/precache-manifest.6aee55672100ac63346f0a57a0c7f4ca.js",
+    "precache-manifest.226082cc72a5b611f229aea6344c7fe2.js": "/Delivery-app/precache-manifest.226082cc72a5b611f229aea6344c7fe2.js",
     "service-worker.js": "/Delivery-app/service-worker.js",
     "static/css/main.d498bfb3.chunk.css.map": "/Delivery-app/static/css/main.d498bfb3.chunk.css.map",
     "static/js/2.69db8bf7.chunk.js.LICENSE.txt": "/Delivery-app/static/js/2.69db8bf7.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.eb717de8.js",
     "static/js/2.69db8bf7.chunk.js",
     "static/css/main.d498bfb3.chunk.css",
-    "static/js/main.e5b806d7.chunk.js"
+    "static/js/main.eb62ba5d.chunk.js"
   ]
 }
