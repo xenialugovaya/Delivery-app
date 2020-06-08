@@ -7,7 +7,7 @@ import { pizzas } from '../Data/Data';
  
 
 const MenuStyle = styled.div`
-padding: 60px;
+  padding: 120px 60px;
 `
 
 export default function Menu() {

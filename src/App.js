@@ -6,16 +6,19 @@ import Menu from './Menu/Menu';
 import Cart from './Cart/Cart';
 
 function App() {
+
+const [openCart, setOpenCart] = React.useState({ menuGrid: 12, cartGrid: 0, cartOpen: false });
+
   return (
     <>
     <GlobalStyle/>
-    <Navbar/>
+    <Navbar setOpenCart = {setOpenCart}/>
     <Grid container>
-      <Grid item xs={7}>
+      <Grid item xs={openCart.menuGrid}>
         <Menu/>
       </Grid>
-      <Grid item xs={5}>
-        <Cart/>
+      <Grid item xs={openCart.cartGrid}>
+        <Cart cartOpen={openCart.cartOpen}/>
       </Grid>      
     </Grid>
    </>
