@@ -10,8 +10,7 @@ const MenuStyle = styled.div`
 padding: 60px;
 `
 
-class Menu extends React.Component{
-  render(){
+export default function Menu() {
     return(
       <MenuStyle>
         <Typography variant="h2" component="h1">
@@ -27,8 +26,5 @@ class Menu extends React.Component{
           })}    
         </Grid>
       </MenuStyle>
-    )
-  }
+    );
 }
-
-export default Menu;
