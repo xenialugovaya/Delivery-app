@@ -10,7 +10,7 @@ const MenuStyle = styled.div`
   padding: 120px 60px;
 `
 
-export default function Menu() {
+export default function Menu({setAddToCart, addToCart}) {
     return(
       <MenuStyle>
         <Typography variant="h2" component="h1">
@@ -20,7 +20,7 @@ export default function Menu() {
           {pizzas.map((pizza) => {
             return(
               <Grid item>
-              <FoodCard  parameters={pizza}/>
+              <FoodCard  parameters={pizza} setAddToCart={setAddToCart} addToCart={addToCart}/>
             </Grid> 
             )
           })}    

@@ -5,6 +5,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
 
 const useStyles = makeStyles({
@@ -30,18 +32,25 @@ const useStyles = makeStyles({
 });
 
 export default function Cart({cartOpen}) {
-  const open = cartOpen;
+  let open = cartOpen;
   const classes = useStyles();
-
+ 
      return(
       <Card className={clsx(classes.root, {
         [classes.open]: open,
       })}>
-        <CardHeader title="Your order"/>
-          <CardContent className={classes.content}>
-            <Typography variant="overline">
-              Your order is empty
-            </Typography>
+        <CardHeader 
+         title="Your order"
+         action={
+          <IconButton aria-label="close">
+            <HighlightOffIcon />
+          </IconButton>
+          } 
+        />
+        <CardContent className={classes.content}>
+          <Typography variant="overline">
+            Your order is empty
+          </Typography>
         </CardContent>
         <Button variant="contained" color="primary" className={classes.button}>
           Proceed to checkout

@@ -8,14 +8,15 @@ import Cart from './Cart/Cart';
 function App() {
 
 const [openCart, setOpenCart] = React.useState({ menuGrid: 12, cartGrid: 0, cartOpen: false });
+const [addToCart, setAddToCart] = React.useState(0);
 
   return (
     <>
     <GlobalStyle/>
-    <Navbar setOpenCart = {setOpenCart}/>
+    <Navbar setOpenCart = {setOpenCart} addToCart={addToCart}/>
     <Grid container>
       <Grid item xs={openCart.menuGrid}>
-        <Menu/>
+        <Menu setAddToCart= {setAddToCart} addToCart={addToCart}/>
       </Grid>
       <Grid item xs={openCart.cartGrid}>
         <Cart cartOpen={openCart.cartOpen}/>
