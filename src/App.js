@@ -4,22 +4,25 @@ import { Grid } from '@material-ui/core';
 import Navbar from './Navbar/Navbar';
 import Menu from './Menu/Menu';
 import Cart from './Cart/Cart';
+import useOpenCart from './Hooks/useOpenCart';
+import useAddToCart from './Hooks/useAddToCart';
+import useOrders from './Hooks/useOrders';
 
 function App() {
-
-const [openCart, setOpenCart] = React.useState({ menuGrid: 12, cartGrid: 0, cartOpen: false });
-const [addToCart, setAddToCart] = React.useState(0);
+const {openCart, setOpenCart} = useOpenCart();
+const addToCart = useAddToCart();
+const orders = useOrders();
 
   return (
     <>
     <GlobalStyle/>
-    <Navbar setOpenCart = {setOpenCart} addToCart={addToCart}/>
+    <Navbar setOpenCart = {setOpenCart} {...addToCart}/>
     <Grid container>
       <Grid item xs={openCart.menuGrid}>
-        <Menu setAddToCart= {setAddToCart} addToCart={addToCart}/>
+        <Menu {...addToCart} {...orders}/>
       </Grid>
       <Grid item xs={openCart.cartGrid}>
-        <Cart cartOpen={openCart.cartOpen}/>
+        <Cart cartOpen={openCart.cartOpen} {...orders}/>
       </Grid>      
     </Grid>
    </>
