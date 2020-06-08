@@ -57,12 +57,12 @@ export default function FoodCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-          <Typography>
-            {price}
-          </Typography>
         <IconButton aria-label="add to cart">
           <AddCircleIcon fontSize="large" color="primary" />
         </IconButton>
+        <Typography>
+          {price}
+        </Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
