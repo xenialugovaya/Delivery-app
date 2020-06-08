@@ -7,11 +7,10 @@ import { pizzas } from '../Data/Data';
  
 
 const MenuStyle = styled.div`
-padding: 60px;
+  padding: 120px 60px;
 `
 
-class Menu extends React.Component{
-  render(){
+export default function Menu({setAddToCart, addToCart}) {
     return(
       <MenuStyle>
         <Typography variant="h2" component="h1">
@@ -21,14 +20,11 @@ class Menu extends React.Component{
           {pizzas.map((pizza) => {
             return(
               <Grid item>
-              <FoodCard  parameters={pizza}/>
+              <FoodCard  parameters={pizza} setAddToCart={setAddToCart} addToCart={addToCart}/>
             </Grid> 
             )
           })}    
         </Grid>
       </MenuStyle>
-    )
-  }
+    );
 }
-
-export default Menu;

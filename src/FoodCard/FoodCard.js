@@ -14,7 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 345,
+    minWidth: '300px',
   },
   media: {
     height: 0,
@@ -32,13 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard(props) {
-  const {title, price, shortDescription, description, image} = props.parameters;
+export default function FoodCard({parameters, setAddToCart, addToCart}) {
+  const {title, price, shortDescription, description, image} = parameters;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const handleAddToCartClick = () => {
+    setAddToCart(addToCart + 1);
   };
 
   return (
@@ -57,7 +60,7 @@ export default function FoodCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to cart">
+        <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
           <AddCircleIcon fontSize="large" color="primary" />
         </IconButton>
         <Typography>
