@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
 
@@ -25,13 +27,19 @@ const useStyles = makeStyles({
   },
   content: {
     height: '100%', 
+    display: 'flex',
+    flexDirection: 'column',
   },
   open:{
     display: 'flex',
+  },
+  list: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 });
 
-export default function Cart({cartOpen}) {
+export default function Cart({cartOpen, orders}) {
   let open = cartOpen;
   const classes = useStyles();
  
@@ -46,15 +54,34 @@ export default function Cart({cartOpen}) {
             <HighlightOffIcon />
           </IconButton>
           } 
-        />
-        <CardContent className={classes.content}>
-          <Typography variant="overline">
-            Your order is empty
-          </Typography>
-        </CardContent>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Proceed to checkout
-        </Button>  
+        />       
+          {orders.length === 0 
+            ? <CardContent className={classes.content}>
+                <Typography variant="overline">
+                  Your order is empty
+                </Typography>  
+              </CardContent>
+            : <>
+                <CardContent className={classes.content}>
+                  {orders.map((order) => (
+                    <>
+                    <ListItem className={classes.list}>
+                      <Typography variant="overline">
+                        {order.title} 
+                      </Typography>  
+                      <Typography variant="overline">
+                        {order.price} 
+                      </Typography> 
+                   </ListItem> 
+                   <Divider/>
+                   </>
+                  ))}
+                </CardContent>
+                <Button variant="contained" color="primary" className={classes.button}>
+                  Proceed to checkout
+                </Button> 
+              </>
+          } 
       </Card>        
      );
 }

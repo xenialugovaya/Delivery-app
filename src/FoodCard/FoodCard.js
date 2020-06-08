@@ -32,16 +32,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({parameters, setAddToCart, addToCart}) {
+export default function FoodCard({parameters, setAddToCart, addToCart, setOrders, orders}) {
   const {title, price, shortDescription, description, image} = parameters;
+  const order = {
+    title,
+    price
+  }
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handleAddToCartClick = () => {
+  const handleAddToCartClick = (e) => {
     setAddToCart(addToCart + 1);
+    setOrders([...orders, order]);
   };
 
   return (
