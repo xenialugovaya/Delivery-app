@@ -10,6 +10,8 @@ import { Divider } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
+import { formatUSDPrice } from '../Data/Data';
+
 
 const useStyles = makeStyles({
   root: {
@@ -67,10 +69,13 @@ export default function Cart({cartOpen, orders}) {
                     <>
                     <ListItem className={classes.list}>
                       <Typography variant="overline">
+                        1
+                      </Typography>  
+                      <Typography variant="overline">
                         {order.title} 
                       </Typography>  
                       <Typography variant="overline">
-                        {order.price} 
+                        {formatUSDPrice(order.priceUSD)} 
                       </Typography> 
                    </ListItem> 
                    <Divider/>

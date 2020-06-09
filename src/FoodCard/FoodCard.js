@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { formatUSDPrice } from '../Data/Data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FoodCard({parameters, setAddToCart, addToCart, setOrders, orders}) {
-  const {title, price, shortDescription, description, image} = parameters;
+  const {title, priceUSD, shortDescription, description, image} = parameters;
   const order = {
     title,
-    price
+    priceUSD
   }
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -69,7 +70,7 @@ export default function FoodCard({parameters, setAddToCart, addToCart, setOrders
           <AddCircleIcon fontSize="large" color="primary" />
         </IconButton>
         <Typography>
-          {price}
+          {formatUSDPrice(priceUSD)}
         </Typography>
         <IconButton
           className={clsx(classes.expand, {
