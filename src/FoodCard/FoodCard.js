@@ -13,7 +13,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuantityInput from '../QuantityInput/QuantityInput';
 import useQuantity from '../Hooks/useQuantity';
-
+import { formatUSDPrice } from '../Data/Data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,13 +36,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FoodCard({index, parameters, setAddToCart, addToCart, setOrders, orders}) {
-  const {title, price, shortDescription, description, image} = parameters;
+  const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
+
 
   const order = {
     id: index,
     title,
-    price,
+    priceUSD,
     quantity: quantity.value
   }
 
@@ -94,7 +95,7 @@ export default function FoodCard({index, parameters, setAddToCart, addToCart, se
         : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
         }
         <Typography>
-          {price}
+          {formatUSDPrice(priceUSD)}
         </Typography>
         <IconButton
           className={clsx(classes.expand, {

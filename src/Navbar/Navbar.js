@@ -41,8 +41,6 @@ export default function Navbar({setOpenCart, orders}){
     });
   }
   
-
-  
   const handleCartClick = () => {
     setOpenCart({menuGrid: 10, cartGrid: 2, cartOpen: true});
   };
