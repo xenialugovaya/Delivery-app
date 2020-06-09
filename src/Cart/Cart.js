@@ -41,6 +41,10 @@ const useStyles = makeStyles({
   }
 });
 
+function getPrice(price, quantity){
+  return price * quantity;
+}
+
 export default function Cart({cartOpen, orders}) {
   let open = cartOpen;
   const classes = useStyles();
@@ -70,15 +74,12 @@ export default function Cart({cartOpen, orders}) {
                     <ListItem className={classes.list}>
                     <Typography variant="overline">
                         {order.quantity} 
-                      </Typography>  
-                      <Typography variant="overline">
-                        1
-                      </Typography>  
+                      </Typography>   
                       <Typography variant="overline">
                         {order.title} 
                       </Typography>  
                       <Typography variant="overline">
-                        {formatUSDPrice(order.priceUSD)} 
+                        {formatUSDPrice(getPrice(order.priceUSD, order.quantity))} 
                       </Typography> 
                    </ListItem> 
                    <Divider/>
