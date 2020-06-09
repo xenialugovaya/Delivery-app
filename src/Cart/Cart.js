@@ -10,7 +10,7 @@ import { Divider } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
-import { formatUSDPrice } from '../Data/Data';
+import { formatUSDPrice, formatEURPrice } from '../Data/Data';
 import { deliveryCost } from '../Data/Data';
 
 
@@ -49,7 +49,7 @@ function getPrice(order){
   return order.priceUSD * order.quantity;
 }
 
-export default function Cart({openCart, setOpenCart, orders}) {
+export default function Cart({openCart, setOpenCart, orders, currency}) {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
@@ -89,7 +89,11 @@ export default function Cart({openCart, setOpenCart, orders}) {
                         {order.title} 
                       </Typography>  
                       <Typography variant="overline">
-                        {formatUSDPrice(getPrice(order))} 
+                        {
+                          currency === 'USD'
+                          ? formatUSDPrice(getPrice(order))
+                          : formatEURPrice(getPrice(order))
+                        } 
                       </Typography> 
                    </ListItem> 
                    <Divider/>
@@ -100,7 +104,11 @@ export default function Cart({openCart, setOpenCart, orders}) {
                       Subtotal:
                     </Typography> 
                     <Typography variant="overline">
-                      {formatUSDPrice(subtotal)}
+                        {
+                          currency === 'USD'
+                          ? formatUSDPrice(subtotal)
+                          : formatEURPrice(subtotal)
+                        }
                     </Typography> 
                   </ListItem>
                   <ListItem className={clsx(classes.list, classes.subtotal)}>
@@ -108,7 +116,11 @@ export default function Cart({openCart, setOpenCart, orders}) {
                       Delivery:
                     </Typography> 
                     <Typography variant="overline">
-                      {formatUSDPrice(deliveryCost)}
+                        {
+                          currency === 'USD'
+                          ? formatUSDPrice(deliveryCost)
+                          : formatEURPrice(deliveryCost)
+                        }
                     </Typography> 
                   </ListItem>
                   <ListItem className={classes.list}>
@@ -116,7 +128,11 @@ export default function Cart({openCart, setOpenCart, orders}) {
                       Total:
                     </Typography> 
                     <Typography variant="h5">
-                      {formatUSDPrice(total)}
+                        {
+                          currency === 'USD'
+                          ? formatUSDPrice(total)
+                          : formatEURPrice(total)
+                        }
                     </Typography> 
                   </ListItem>
                 </CardContent>

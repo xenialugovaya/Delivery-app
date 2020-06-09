@@ -14,7 +14,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuantityInput from '../QuantityInput/QuantityInput';
 import useQuantity from '../Hooks/useQuantity';
 import useCardExpand from '../Hooks/useCardExpand';
-import { formatUSDPrice } from '../Data/Data';
+import { formatUSDPrice, formatEURPrice } from '../Data/Data';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,11 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({index, parameters, setOrders, orders}) {
+export default function FoodCard({index, parameters, setOrders, orders, currency}) {
   const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
   const { cardExpand, setCardExpand } = useCardExpand();
-
   const order = {
     id: index,
     title,
@@ -70,7 +69,6 @@ export default function FoodCard({index, parameters, setOrders, orders}) {
     setOrders([...orders]);
   }
   
-
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -95,7 +93,10 @@ export default function FoodCard({index, parameters, setOrders, orders}) {
         : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
         }
         <Typography>
-          {formatUSDPrice(priceUSD)}
+          { currency === 'USD'
+              ? formatUSDPrice(priceUSD)
+              : formatEURPrice(priceUSD)
+          }
         </Typography>
         <IconButton
           className={clsx(classes.expand, {
