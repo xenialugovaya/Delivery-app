@@ -31,60 +31,62 @@ export const currencies = [
 
 export const deliveryCost = 5;
 
+const imagePath = process.env.PUBLIC_URL + '/images/';
+
 export const pizzas = [{
     title: 'pizza1',
     priceUSD: 9.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza.png'
+    image: `${imagePath}pizza.png`
   },
   {
     title: 'pizza2',
     priceUSD: 7,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 5.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 8,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 6.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 7,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 6.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
   {
     title: 'pizza2',
     priceUSD: 6,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: '/images/pizza2.jpeg'
+    image: `${imagePath}pizza2.jpeg`
   },
 ]
