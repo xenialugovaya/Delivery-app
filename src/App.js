@@ -8,19 +8,20 @@ import useOpenCart from './Hooks/useOpenCart';
 import useOrders from './Hooks/useOrders';
 
 function App() {
-const {openCart, setOpenCart} = useOpenCart();
+const openCartHook = useOpenCart();
+const { menuGrid, cartGrid } = openCartHook.openCart;
 const orders = useOrders();
 
   return (
     <>
     <GlobalStyle/>
-    <Navbar setOpenCart = {setOpenCart} {...orders}/>
+    <Navbar { ...openCartHook } { ...orders }/>
     <Grid container>
-      <Grid item xs={openCart.menuGrid}>
-        <Menu {...orders}/>
+      <Grid item xs = { menuGrid }>
+        <Menu orders = { orders }/>
       </Grid>
-      <Grid item xs={openCart.cartGrid}>
-        <Cart cartOpen={openCart.cartOpen} {...orders}/>
+      <Grid item xs = { cartGrid }>
+        <Cart { ...openCartHook } { ...orders }/>
       </Grid>      
     </Grid>
    </>

@@ -33,9 +33,7 @@ const NavMenu = styled.div`
 export default function Navbar({setOpenCart, orders}){
 
   let amount = 0;
-  if(orders.length === 0){
-    amount = 0;
-  } else {
+  if(orders.length !== 0){
     orders.forEach((order) => {
       amount += order.quantity;
     });

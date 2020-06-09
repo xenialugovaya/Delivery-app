@@ -45,18 +45,20 @@ function getPrice(price, quantity){
   return price * quantity;
 }
 
-export default function Cart({cartOpen, orders}) {
-  let open = cartOpen;
+export default function Cart({openCart, setOpenCart, orders}) {
+  const {cartOpen} = openCart;
   const classes = useStyles();
- 
+  const handleCloseClick = () => {
+    setOpenCart({cartOpen: false});
+  };
      return(
       <Card className={clsx(classes.root, {
-        [classes.open]: open,
+        [classes.open]: cartOpen,
       })}>
         <CardHeader 
          title="Your order"
          action={
-          <IconButton aria-label="close">
+          <IconButton aria-label="close" onClick={handleCloseClick}>
             <HighlightOffIcon />
           </IconButton>
           } 

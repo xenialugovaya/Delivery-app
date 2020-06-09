@@ -13,7 +13,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuantityInput from '../QuantityInput/QuantityInput';
 import useQuantity from '../Hooks/useQuantity';
+import useCardExpand from '../Hooks/useCardExpand';
 import { formatUSDPrice } from '../Data/Data';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FoodCard({index, parameters, setOrders, orders}) {
   const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
-
+  const { cardExpand, setCardExpand } = useCardExpand();
 
   const order = {
     id: index,
@@ -48,12 +50,11 @@ export default function FoodCard({index, parameters, setOrders, orders}) {
   }
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
   const [addToCartClicked, setAddToCartClicked] = React.useState(false);
 
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setCardExpand(!cardExpand);
   };
   const handleAddToCartClick = () => {
     setOrders([...orders, order]);
@@ -98,16 +99,16 @@ export default function FoodCard({index, parameters, setOrders, orders}) {
         </Typography>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: cardExpand,
           })}
           onClick={handleExpandClick}
-          aria-expanded={expanded}
+          aria-expanded={cardExpand}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={cardExpand} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
              {description}
