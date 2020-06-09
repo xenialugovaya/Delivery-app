@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({index, parameters, setAddToCart, addToCart, setOrders, orders}) {
+export default function FoodCard({index, parameters, setOrders, orders}) {
   const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
 
@@ -56,7 +56,6 @@ export default function FoodCard({index, parameters, setAddToCart, addToCart, se
     setExpanded(!expanded);
   };
   const handleAddToCartClick = () => {
-    setAddToCart(addToCart + 1);
     setOrders([...orders, order]);
     setAddToCartClicked(true);
   };
