@@ -58,7 +58,7 @@ export default function Cart({cartOpen, orders}) {
           {orders.length === 0 
             ? <CardContent className={classes.content}>
                 <Typography variant="overline">
-                  Your order is empty
+                  Your cart is empty
                 </Typography>  
               </CardContent>
             : <>
