@@ -11,10 +11,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import QuantityInput from '../QuantityInput/QuantityInput';
+import useQuantity from '../Hooks/useQuantity';
+import { formatUSDPrice } from '../Data/Data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 345,
+    minWidth: '300px',
   },
   media: {
     height: 0,
@@ -32,14 +35,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard(props) {
-  const {title, price, shortDescription, description, image} = props.parameters;
+export default function FoodCard({index, parameters, setAddToCart, addToCart, setOrders, orders}) {
+  const {title, priceUSD, shortDescription, description, image} = parameters;
+  const quantity = useQuantity();
+
+
+  const order = {
+    id: index,
+    title,
+    priceUSD,
+    quantity: quantity.value
+  }
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [addToCartClicked, setAddToCartClicked] = React.useState(false);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const handleAddToCartClick = () => {
+    setAddToCart(addToCart + 1);
+    setOrders([...orders, order]);
+    setAddToCartClicked(true);
+  };
+
+  const handleQuantityClick = (value) => {
+    orders.forEach((order) => {
+      if(order.id === index){
+        order.quantity = value;
+      }
+    });
+    setOrders([...orders]);
+  }
+  
 
   return (
     <Card className={classes.root}>
@@ -57,12 +87,16 @@ export default function FoodCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-          <Typography>
-            {price}
-          </Typography>
-        <IconButton aria-label="add to cart">
-          <AddCircleIcon fontSize="large" color="primary" />
-        </IconButton>
+        {
+        !addToCartClicked 
+        ? <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
+            <AddCircleIcon fontSize="large" color="primary" />
+          </IconButton>
+        : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
+        }
+        <Typography>
+          {formatUSDPrice(priceUSD)}
+        </Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

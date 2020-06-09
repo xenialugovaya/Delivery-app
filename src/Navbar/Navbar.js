@@ -10,6 +10,9 @@ import styled from 'styled-components'
 
 
 const NavbarStyle = styled.div`
+  position: fixed;
+  right: 0px;
+  left:0px;
   background: white;
   padding: 15px 25px;
   display: flex;
@@ -27,8 +30,21 @@ const NavMenu = styled.div`
   padding-left: 25px;
 `
 
-class Navbar extends React.Component{
-  render(){
+export default function Navbar({setOpenCart, orders}){
+
+  let amount = 0;
+  if(orders.length === 0){
+    amount = 0;
+  } else {
+    orders.forEach((order) => {
+      amount += order.quantity;
+    });
+  }
+  
+  const handleCartClick = () => {
+    setOpenCart({menuGrid: 10, cartGrid: 2, cartOpen: true});
+  };
+
     return (
       <NavbarStyle>
         <Logo>
@@ -49,15 +65,12 @@ class Navbar extends React.Component{
           </Grid>
         </Logo>
         <NavMenu>
-          <IconButton color="primary" aria-label="add to shopping cart">
-            <Badge badgeContent={4} color="secondary">
+          <IconButton color="primary" aria-label="add to shopping cart" onClick={handleCartClick}>
+            <Badge badgeContent={amount} color="secondary">
               <AddShoppingCartIcon />
             </Badge>
           </IconButton>
         </NavMenu>
       </NavbarStyle>
     )
-  }
 }
-
-export default Navbar;
