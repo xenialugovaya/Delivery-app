@@ -11,6 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import clsx from 'clsx';
 import { formatUSDPrice } from '../Data/Data';
+import { deliveryCost } from '../Data/Data';
 
 
 const useStyles = makeStyles({
@@ -38,15 +39,22 @@ const useStyles = makeStyles({
   list: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  subtotal: {
+    background: '#eee',
   }
 });
 
-function getPrice(price, quantity){
-  return price * quantity;
+function getPrice(order){
+  return order.priceUSD * order.quantity;
 }
 
 export default function Cart({openCart, setOpenCart, orders}) {
-  const {cartOpen} = openCart;
+  const subtotal = orders.reduce((total, order) => {
+    return total + getPrice(order);
+  }, 0);
+  const total = subtotal + deliveryCost;
+  const { cartOpen } = openCart;
   const classes = useStyles();
   const handleCloseClick = () => {
     setOpenCart({cartOpen: false});
@@ -81,12 +89,36 @@ export default function Cart({openCart, setOpenCart, orders}) {
                         {order.title} 
                       </Typography>  
                       <Typography variant="overline">
-                        {formatUSDPrice(getPrice(order.priceUSD, order.quantity))} 
+                        {formatUSDPrice(getPrice(order))} 
                       </Typography> 
                    </ListItem> 
                    <Divider/>
                    </>
                   ))}
+                  <ListItem className={clsx(classes.list, classes.subtotal)}>
+                    <Typography variant="overline">
+                      Subtotal:
+                    </Typography> 
+                    <Typography variant="overline">
+                      {formatUSDPrice(subtotal)}
+                    </Typography> 
+                  </ListItem>
+                  <ListItem className={clsx(classes.list, classes.subtotal)}>
+                    <Typography variant="overline">
+                      Delivery:
+                    </Typography> 
+                    <Typography variant="overline">
+                      {formatUSDPrice(deliveryCost)}
+                    </Typography> 
+                  </ListItem>
+                  <ListItem className={classes.list}>
+                    <Typography variant="h5">
+                      Total:
+                    </Typography> 
+                    <Typography variant="h5">
+                      {formatUSDPrice(total)}
+                    </Typography> 
+                  </ListItem>
                 </CardContent>
                 <Button variant="contained" color="primary" className={classes.button}>
                   Proceed to checkout

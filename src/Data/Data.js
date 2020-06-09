@@ -12,6 +12,8 @@ export function formatEURPrice(price) {
   });
 }
 
+export const deliveryCost = 5;
+
 export const pizzas = [{
     title: 'pizza1',
     priceUSD: 9.5,
