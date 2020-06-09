@@ -66,6 +66,9 @@ export default function Cart({cartOpen, orders}) {
                   {orders.map((order) => (
                     <>
                     <ListItem className={classes.list}>
+                    <Typography variant="overline">
+                        {order.quantity} 
+                      </Typography>  
                       <Typography variant="overline">
                         {order.title} 
                       </Typography>  

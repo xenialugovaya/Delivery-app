@@ -17,10 +17,10 @@ export default function Menu({setAddToCart, addToCart, setOrders, orders}) {
           Menu
         </Typography>
         <Grid container spacing={2}>
-          {pizzas.map((pizza) => {
+          {pizzas.map((pizza, index) => {
             return(
-              <Grid item>
-              <FoodCard  parameters={pizza} setAddToCart={setAddToCart} addToCart={addToCart} setOrders={setOrders} orders={orders}/>
+            <Grid item key={index}>
+              <FoodCard index={index} parameters={pizza} setAddToCart={setAddToCart} addToCart={addToCart} setOrders={setOrders} orders={orders}/>
             </Grid> 
             )
           })}    

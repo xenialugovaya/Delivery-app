@@ -16,7 +16,7 @@ const orders = useOrders();
   return (
     <>
     <GlobalStyle/>
-    <Navbar setOpenCart = {setOpenCart} {...addToCart}/>
+    <Navbar setOpenCart = {setOpenCart} {...orders}/>
     <Grid container>
       <Grid item xs={openCart.menuGrid}>
         <Menu {...addToCart} {...orders}/>

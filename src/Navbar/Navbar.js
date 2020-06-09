@@ -30,8 +30,19 @@ const NavMenu = styled.div`
   padding-left: 25px;
 `
 
-export default function Navbar({setOpenCart, addToCart}){
+export default function Navbar({setOpenCart, orders}){
 
+  let amount = 0;
+  if(orders.length === 0){
+    amount = 0;
+  } else {
+    orders.forEach((order) => {
+      amount += order.quantity;
+    });
+  }
+  
+
+  
   const handleCartClick = () => {
     setOpenCart({menuGrid: 10, cartGrid: 2, cartOpen: true});
   };
@@ -57,7 +68,7 @@ export default function Navbar({setOpenCart, addToCart}){
         </Logo>
         <NavMenu>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={handleCartClick}>
-            <Badge badgeContent={addToCart} color="secondary">
+            <Badge badgeContent={amount} color="secondary">
               <AddShoppingCartIcon />
             </Badge>
           </IconButton>
