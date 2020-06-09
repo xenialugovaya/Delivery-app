@@ -13,7 +13,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import QuantityInput from '../QuantityInput/QuantityInput';
 import useQuantity from '../Hooks/useQuantity';
-import { formatUSDPrice } from '../Data/Data';
+import useCardExpand from '../Hooks/useCardExpand';
+import { formatUSDPrice, formatEURPrice } from '../Data/Data';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,11 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({index, parameters, setAddToCart, addToCart, setOrders, orders}) {
+export default function FoodCard({index, parameters, setOrders, orders, currency}) {
   const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
-
-
+  const { cardExpand, setCardExpand } = useCardExpand();
   const order = {
     id: index,
     title,
@@ -48,15 +49,13 @@ export default function FoodCard({index, parameters, setAddToCart, addToCart, se
   }
 
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
   const [addToCartClicked, setAddToCartClicked] = React.useState(false);
 
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setCardExpand(!cardExpand);
   };
   const handleAddToCartClick = () => {
-    setAddToCart(addToCart + 1);
     setOrders([...orders, order]);
     setAddToCartClicked(true);
   };
@@ -70,7 +69,6 @@ export default function FoodCard({index, parameters, setAddToCart, addToCart, se
     setOrders([...orders]);
   }
   
-
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -95,20 +93,23 @@ export default function FoodCard({index, parameters, setAddToCart, addToCart, se
         : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
         }
         <Typography>
-          {formatUSDPrice(priceUSD)}
+          { currency === 'USD'
+              ? formatUSDPrice(priceUSD)
+              : formatEURPrice(priceUSD)
+          }
         </Typography>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
+            [classes.expandOpen]: cardExpand,
           })}
           onClick={handleExpandClick}
-          aria-expanded={expanded}
+          aria-expanded={cardExpand}
           aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <Collapse in={cardExpand} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
              {description}

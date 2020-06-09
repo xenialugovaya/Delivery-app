@@ -13,6 +13,7 @@ const QuantityInputStyle = styled.div`
   justify-content: space-evenly;
   align-items: center;
   height: 40px;
+  margin: 9.5px;
 `;
 
 const useStyles = makeStyles(() => ({

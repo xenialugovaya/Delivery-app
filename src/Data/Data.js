@@ -1,3 +1,5 @@
+const EXCHANGE_RATE_USD_TO_EUR = 0.88;
+
 export function formatUSDPrice(price) {
   return price.toLocaleString('en-US', {
     style: 'currency',
@@ -6,11 +8,28 @@ export function formatUSDPrice(price) {
 }
 
 export function formatEURPrice(price) {
-  return price.toLocaleString('de-DE', {
+  return convertToEUR(price).toLocaleString('de-DE', {
     style: 'currency',
     currency: 'EUR'
   });
 }
+
+function convertToEUR(priceUSD) {
+  return priceUSD * EXCHANGE_RATE_USD_TO_EUR;
+}
+
+export const currencies = [
+  {
+    value: 'USD',
+    label: '$',
+  },
+  {
+    value: 'EUR',
+    label: '€',
+  },
+];
+
+export const deliveryCost = 5;
 
 export const pizzas = [{
     title: 'pizza1',
