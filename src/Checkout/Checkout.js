@@ -1,26 +1,22 @@
 import React from 'react';
 import styled from 'styled-components'
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import TextField from '@material-ui/core/TextField';
+import { Typography, Button, FormControl, FormHelperText, TextField, Input, InputLabel } from '@material-ui/core';
 import MaskedInput from 'react-text-mask';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 
 const CheckoutStyle = styled.div`
   padding: 120px 60px;
   @media (max-width: 700px) {
     padding: 120px 0px;
   }
-`
+`;
+
 const CheckoutForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
+
 const useStyles = makeStyles((theme) => ({
   root: {
    background: 'white',
@@ -53,7 +49,6 @@ function TextMaskCustom(props) {
 }
 
 export default function Checkout({setCheckout, setOrders}){
-
   const [formData, setFormData] = React.useState({'userName': '', 'userSurname': '', 'address': '', 'phone': '', 'submitted': false});
   
   const classes = useStyles(); 
@@ -84,8 +79,6 @@ export default function Checkout({setCheckout, setOrders}){
         formData.error++;
       }
     }
-    console.log(formData);
-    console.log(formData.error);
     setFormData({...formData})
     if (!formData.error){
       formData.submitted = true;
