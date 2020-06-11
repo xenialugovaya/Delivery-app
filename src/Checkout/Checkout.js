@@ -157,7 +157,7 @@ export default function Checkout({setCheckout, setOrders}){
           </form>
           </CheckoutForm>
         : <Typography className={classes.title} variant="h2" component="h1">
-            Your order was received! Thank you!
+            Your order has been received! Thank you!
           </Typography>
       }
     </CheckoutStyle>

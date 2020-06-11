@@ -77,7 +77,7 @@ export default function Cart({openCartHook, ordersHook, currency, deletedHook, c
   };
 
   const handleCloseClick = () => {
-    setOpenCart({checkoutGrid: 12, cartOpen: false});
+    setOpenCart({menuGrid: 12, checkoutGrid: 12, cartOpen: false});
   };
 
   const handleProceedToCheckoutClick = () => {
@@ -106,7 +106,7 @@ export default function Cart({openCartHook, ordersHook, currency, deletedHook, c
             : <>
                 <CardContent className={classes.content}>
                   {orders.map((order, index) => (
-                    <>
+                    <div key={index}>
                       <ListItem className={classes.list}>
                         <div className={classes.quantity}>
                           <Typography variant="overline">
@@ -130,7 +130,7 @@ export default function Cart({openCartHook, ordersHook, currency, deletedHook, c
                         </div>
                     </ListItem> 
                     <Divider/>
-                   </>
+                   </div>
                   ))}
                   <ListItem className={clsx(classes.list, classes.subtotal)}>
                     <Typography variant="overline">

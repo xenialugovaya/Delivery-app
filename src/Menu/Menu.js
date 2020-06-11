@@ -58,12 +58,12 @@ export default function Menu({orders, currency, deleted}) {
           Menu
         </Typography>
         <MenuChips>
-          {Object.entries(menuItems).map(([sectionName]) => (
-            <Chip color="primary" className={classes.chip} label={sectionName} onClick={() => handleClick(sectionName)}/>
+          {Object.entries(menuItems).map(([sectionName], index) => (
+            <Chip key={index} color="primary" className={classes.chip} label={sectionName} onClick={() => handleClick(sectionName)}/>
           ))}
         </MenuChips>  
         {Object.entries(menuItems).map(([sectionName, foods], sectionIndex) => (
-          <MenuSection>
+          <MenuSection key={sectionIndex}>
             <Typography id={sectionName} className={classes.sectionTitle} variant="h4" component="h3">
               {sectionName}
             </Typography>
