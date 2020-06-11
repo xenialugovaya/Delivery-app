@@ -33,60 +33,84 @@ export const deliveryCost = 5;
 
 const imagePath = process.env.PUBLIC_URL + '/images/';
 
-export const pizzas = [{
+export const foodItems = [{
     title: 'pizza1',
     priceUSD: 9.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza.png`
+    image: `${imagePath}pizza.png`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 7,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 5.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 8,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 6.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 7,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 6.5,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
   },
   {
     title: 'pizza2',
     priceUSD: 6,
     shortDescription: 'amazing pizza',
     description: 'amazing pizza',
-    image: `${imagePath}pizza2.jpeg`
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Pizza',
+  },
+  {
+    title: 'drink1',
+    priceUSD: 1,
+    shortDescription: 'amazing pizza',
+    description: 'amazing pizza',
+    image: `${imagePath}pizza2.jpeg`,
+    section: 'Drinks',
   },
 ]
+
+export const menuItems = foodItems.reduce((res, food) => {
+  if (!res[food.section]) {
+    res[food.section] = [];
+  }
+  res[food.section].push(food);
+  return res;
+}, {});
