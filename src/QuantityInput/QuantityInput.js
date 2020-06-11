@@ -44,13 +44,21 @@ export default function QuantityInput({quantity, onClick}){
     quantity.setValue(quantity.value + 1);
     onClick(quantity.value + 1);
   };
+  const quantityOnChange = (event) => {
+    if (!(+event.target.value >= 1)) {
+      quantity.setValue(1);
+      return;
+   }
+    quantity.setValue(+event.target.value);
+    onClick(+event.target.value);
+  }
     return(
       <QuantityInputStyle>
       <IconButton className={classes.controls} onClick={handleDecrementClick} disabled={quantity.value === 1}>
         <RemoveOutlinedIcon color='primary'/>
       </IconButton>
         <FormControl variant="filled" className={classes.root}>   
-            <InputBase className={classes.input} value={quantity.value} onChange={quantity.onChange} />
+            <InputBase className={classes.input} value={quantity.value} onChange={(event) => quantityOnChange(event)} />
         </FormControl>
       <IconButton className={classes.controls} onClick={handleIncrementClick}>
         <AddOutlinedIcon color='primary'/>
