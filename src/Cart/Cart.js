@@ -9,10 +9,10 @@ import { IconButton } from '@material-ui/core';
 import { Divider } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
 import { formatUSDPrice, formatEURPrice } from '../Data/Data';
 import { deliveryCost } from '../Data/Data';
-
 
 const useStyles = makeStyles({
   root: {
@@ -50,16 +50,30 @@ function getPrice(order){
   return order.priceUSD * order.quantity;
 }
 
-export default function Cart({openCart, setOpenCart, orders, currency}) {
+export default function Cart({openCart, setOpenCart, orders, setOrders, currency, deletedItemIndex, setDeletedItemIndex, checkout, setCheckout}) {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
   const total = subtotal + deliveryCost;
   const { cartOpen } = openCart;
   const classes = useStyles();
+
+  const deleteItem = (index) => {
+    const orderId = orders[index].id;
+    setDeletedItemIndex([...deletedItemIndex, orderId]);
+    const newOrders = [...orders];
+    newOrders.splice(index, 1);
+    setOrders([...newOrders]);
+  };
+
   const handleCloseClick = () => {
     setOpenCart({cartOpen: false});
   };
+
+  const handleButtonClick = () => {
+    setCheckout(true);
+  };
+
      return(
       <Card className={clsx(classes.root, {
         [classes.open]: cartOpen,
@@ -80,7 +94,7 @@ export default function Cart({openCart, setOpenCart, orders, currency}) {
               </CardContent>
             : <>
                 <CardContent className={classes.content}>
-                  {orders.map((order) => (
+                  {orders.map((order, index) => (
                     <>
                     <ListItem className={classes.list}>
                     <Typography variant="overline">
@@ -96,6 +110,9 @@ export default function Cart({openCart, setOpenCart, orders, currency}) {
                           : formatEURPrice(getPrice(order))
                         } 
                       </Typography> 
+                      <IconButton onClick={() => deleteItem(index)}>
+                        <CloseIcon/>
+                      </IconButton>
                    </ListItem> 
                    <Divider/>
                    </>
@@ -137,9 +154,12 @@ export default function Cart({openCart, setOpenCart, orders, currency}) {
                     </Typography> 
                   </ListItem>
                 </CardContent>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  Proceed to checkout
-                </Button> 
+                {
+                  !checkout &&
+                  <Button variant="contained" color="primary" className={classes.button} onClick={handleButtonClick}>
+                    Proceed to checkout
+                  </Button> 
+                }
               </>
           } 
       </Card>        

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({index, parameters, setOrders, orders, currency}) {
+export default function FoodCard({index, parameters, setOrders, orders, currency, deletedItemIndex, setDeletedItemIndex}) {
   const {title, priceUSD, shortDescription, description, image} = parameters;
   const quantity = useQuantity();
   const { cardExpand, setCardExpand } = useCardExpand();
@@ -51,13 +51,21 @@ export default function FoodCard({index, parameters, setOrders, orders, currency
   const classes = useStyles();
   const [addToCartClicked, setAddToCartClicked] = React.useState(false);
 
-
   const handleExpandClick = () => {
     setCardExpand(!cardExpand);
   };
+
   const handleAddToCartClick = () => {
     setOrders([...orders, order]);
-    setAddToCartClicked(true);
+    setAddToCartClicked(true); 
+    if (deletedItemIndex.find(clicked => clicked === index) !== undefined){
+      const newDeletedItems = [...deletedItemIndex];
+      const pos = newDeletedItems.findIndex(i => i === index);
+      newDeletedItems.splice(pos, 1);
+      setDeletedItemIndex([...newDeletedItems]);
+      quantity.setValue(1);
+      order.quantity = 1;
+    }
   };
 
   const handleQuantityClick = (value) => {
@@ -86,7 +94,7 @@ export default function FoodCard({index, parameters, setOrders, orders, currency
       </CardContent>
       <CardActions disableSpacing>
         {
-        !addToCartClicked 
+        !addToCartClicked || deletedItemIndex.find(clicked => clicked === index) !== undefined
         ? <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
             <AddCircleIcon fontSize="large" color="primary" />
           </IconButton>
