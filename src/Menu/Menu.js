@@ -50,16 +50,17 @@ export default function Menu({orders, currency, deleted}) {
             <Chip color="primary" className={classes.chip} label={sectionName} onClick={() => handleClick(sectionName)}/>
           ))}
         </MenuChips>  
-        {Object.entries(menuItems).map(([sectionName, foods]) => (
+        {Object.entries(menuItems).map(([sectionName, foods], sectionIndex) => (
           <>
             <Typography id={sectionName} className={classes.section} variant="h4" component="h3">
               {sectionName}
             </Typography>
             <Grid container spacing={2}>
-              {foods.map((item, index) => {
+              {foods.map((item, itemIndex) => {
+                const generatedIndex = parseInt(String(sectionIndex) + String(itemIndex));
                 return(
-                  <Grid item key={index}>
-                    <FoodCard index={index} parameters={item} { ...orders } {...currency} {...deleted}/>
+                  <Grid item key={generatedIndex}>
+                    <FoodCard index={generatedIndex} parameters={item} { ...orders } {...currency} {...deleted}/>
                   </Grid> 
                   )
                 })}    
