@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Grid} from '@material-ui/core';
 import {Badge} from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { Icon } from '@material-ui/core';
-import LocalPizzaTwoToneIcon from '@material-ui/icons/LocalPizzaTwoTone';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import CurrencySwitcher from '../CurrencySwitcher/CurrencySwitcher';
+import Logo from '../Logo/Logo';
 
 
 const NavbarStyle = styled.div`
@@ -19,10 +16,11 @@ const NavbarStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 15px 10px -15px #111;    
+  box-shadow: 0px 15px 10px -15px #111; 
+  z-index: 1000;   
 `;
 
-const Logo = styled.div`
+export const LogoStyle = styled.div`
   border-right: 1px solid grey;
   padding-right: 25px;
 `;
@@ -42,28 +40,14 @@ export default function Navbar({setOpenCart, orders, currency}){
   }
   
   const handleCartClick = () => {
-    setOpenCart({menuGrid: 10, cartGrid: 2, cartOpen: true});
+    setOpenCart({menuGrid: 10, checkoutGrid: 8, cartGrid: 2, cartOpen: true});
   };
 
     return (
       <NavbarStyle>
-        <Logo>
-         <Grid container spacing={2}>
-            <Grid item>
-              <Icon color="primary">
-                <LocalPizzaTwoToneIcon fontSize="large"/>
-              </Icon>
-            </Grid>
-            <Grid item>
-              <Typography variant="h4">
-                Pizza
-              </Typography>
-              <Typography variant="overline">
-                Delivery
-              </Typography>
-            </Grid>
-          </Grid>
-        </Logo>
+        <LogoStyle>
+          <Logo/>
+        </LogoStyle>
         <CurrencySwitcher {...currency}/>
         <NavMenu>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={handleCartClick}>

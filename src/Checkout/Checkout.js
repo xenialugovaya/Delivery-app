@@ -16,8 +16,9 @@ const CheckoutStyle = styled.div`
 const useStyles = makeStyles((theme) => ({
   root: {
    background: 'white',
-   padding: '20px 40px',
-   width: '100%',
+   padding: '20px 65px 20px 40px',
+   width: '80%',
+   maxWidth: '700px',
    '& > *': {
     margin: theme.spacing(2),
   },
@@ -97,10 +98,11 @@ export default function Checkout({setCheckout, setOrders}){
         Back to Menu
       </Button>
       {!formData.submitted  
-        ? <form className={classes.root} onSubmit={handleSubmit}>
-            <Typography className={classes.title} variant="h2" component="h1">
-              Order registration
-            </Typography>
+        ?<>
+          <Typography className={classes.title} variant="h2" component="h1">
+            Order registration
+           </Typography> 
+          <form className={classes.root} onSubmit={handleSubmit}>
             <TextField 
               name="userName" 
               label="Name" 
@@ -139,6 +141,7 @@ export default function Checkout({setCheckout, setOrders}){
             </Typography>
             <TextField 
               fullWidth 
+              multiline
               name="comment" 
               label="Leave a comment" 
               variant="filled" 
@@ -148,6 +151,7 @@ export default function Checkout({setCheckout, setOrders}){
               Place order
             </Button>
           </form>
+          </>
         : <Typography className={classes.title} variant="h2" component="h1">
             Your order was received! Thank you!
           </Typography>
