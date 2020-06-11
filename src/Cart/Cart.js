@@ -50,7 +50,7 @@ function getPrice(order){
   return order.priceUSD * order.quantity;
 }
 
-export default function Cart({openCart, setOpenCart, orders, setOrders, currency, deletedItemIndex, setDeletedItemIndex}) {
+export default function Cart({openCart, setOpenCart, orders, setOrders, currency, deletedItemIndex, setDeletedItemIndex, checkout, setCheckout}) {
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
@@ -65,9 +65,15 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
     newOrders.splice(index, 1);
     setOrders([...newOrders]);
   };
+
   const handleCloseClick = () => {
     setOpenCart({cartOpen: false});
   };
+
+  const handleButtonClick = () => {
+    setCheckout(true);
+  };
+
      return(
       <Card className={clsx(classes.root, {
         [classes.open]: cartOpen,
@@ -148,9 +154,12 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
                     </Typography> 
                   </ListItem>
                 </CardContent>
-                <Button variant="contained" color="primary" className={classes.button}>
-                  Proceed to checkout
-                </Button> 
+                {
+                  !checkout &&
+                  <Button variant="contained" color="primary" className={classes.button} onClick={handleButtonClick}>
+                    Proceed to checkout
+                  </Button> 
+                }
               </>
           } 
       </Card>        
