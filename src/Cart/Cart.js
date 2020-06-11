@@ -42,9 +42,21 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  itemTitle:{
+    margin: '0px 10px',
+    minWidth: '90px',
+  },
   subtotal: {
     background: '#eee',
-  }
+  },
+  quantity: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  price: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
 
 function getPrice(order){
@@ -98,22 +110,26 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
                   {orders.map((order, index) => (
                     <>
                     <ListItem className={classes.list}>
-                    <Typography variant="overline">
-                        {order.quantity} 
-                      </Typography>   
-                      <Typography variant="overline">
-                        {order.title} 
-                      </Typography>  
-                      <Typography variant="overline">
-                        {
-                          currency === 'USD'
-                          ? formatUSDPrice(getPrice(order))
-                          : formatEURPrice(getPrice(order))
-                        } 
-                      </Typography> 
-                      <IconButton onClick={() => deleteItem(index)}>
-                        <CloseIcon/>
-                      </IconButton>
+                      <div className={classes.quantity}>
+                        <Typography variant="overline">
+                          {order.quantity} 
+                        </Typography>   
+                        <Typography className={classes.itemTitle} variant="caption">
+                          {order.title} 
+                        </Typography>
+                      </div>  
+                      <div className={classes.price}>
+                        <Typography variant="overline">
+                          {
+                            currency === 'USD'
+                              ? formatUSDPrice(getPrice(order))
+                              : formatEURPrice(getPrice(order))
+                          } 
+                        </Typography> 
+                        <IconButton onClick={() => deleteItem(index)}>
+                          <CloseIcon fontSize="small"/>
+                        </IconButton>
+                      </div>
                    </ListItem> 
                    <Divider/>
                    </>

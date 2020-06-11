@@ -19,7 +19,10 @@ import { formatUSDPrice, formatEURPrice } from '../Data/Data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: '300px',
+    width: '300px',
+  },
+  header: {
+    minHeight: '64px',
   },
   media: {
     height: 0,
@@ -80,6 +83,7 @@ export default function FoodCard({index, parameters, setOrders, orders, currency
   return (
     <Card className={classes.root}>
       <CardHeader
+        className={classes.header}
         title={title}
       />
       <CardMedia
