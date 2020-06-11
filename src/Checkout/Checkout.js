@@ -62,6 +62,9 @@ export default function Checkout({setCheckout, setOrders}){
     setValues({
       textmask: event.target.value,
     });
+    formData.phone = event.target.value;
+    formData.phoneError = false;
+    setFormData({...formData});
   };
 
   const handleSubmit = (event) => {
@@ -73,6 +76,8 @@ export default function Checkout({setCheckout, setOrders}){
         formData.error++;
       }
     }
+    console.log(formData);
+    console.log(formData.error);
     setFormData({...formData})
     if (!formData.error){
       formData.submitted = true;
@@ -85,11 +90,9 @@ export default function Checkout({setCheckout, setOrders}){
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
-    setFormData({
-      [name]: value,
-      [name + 'Error']: false,
-    });
+    formData[name] = value;
+    formData[name + 'Error']= false;
+    setFormData({...formData});
   }
 
   return(
