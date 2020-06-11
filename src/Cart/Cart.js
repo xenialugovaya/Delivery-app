@@ -80,11 +80,12 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
   };
 
   const handleCloseClick = () => {
-    setOpenCart({cartOpen: false});
+    setOpenCart({checkoutGrid: 12, cartOpen: false});
   };
 
   const handleButtonClick = () => {
     setCheckout(true);
+    setOpenCart({checkoutGrid: 12, cartOpen: false});
   };
 
      return(

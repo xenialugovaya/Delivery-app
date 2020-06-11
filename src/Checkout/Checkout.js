@@ -12,6 +12,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const CheckoutStyle = styled.div`
   padding: 120px 60px;
+  @media (max-width: 700px) {
+    padding: 120px 0px;
+  }
+`
+const CheckoutForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,7 +109,7 @@ export default function Checkout({setCheckout, setOrders}){
         Back to Menu
       </Button>
       {!formData.submitted  
-        ?<>
+        ?<CheckoutForm>
           <Typography className={classes.title} variant="h2" component="h1">
             Order registration
            </Typography> 
@@ -154,7 +162,7 @@ export default function Checkout({setCheckout, setOrders}){
               Place order
             </Button>
           </form>
-          </>
+          </CheckoutForm>
         : <Typography className={classes.title} variant="h2" component="h1">
             Your order was received! Thank you!
           </Typography>
