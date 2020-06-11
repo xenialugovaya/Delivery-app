@@ -5,6 +5,7 @@ import Navbar from './Navbar/Navbar';
 import Menu from './Menu/Menu';
 import Cart from './Cart/Cart';
 import Checkout from './Checkout/Checkout';
+import Footer from './Footer/Footer';
 import useOpenCart from './Hooks/useOpenCart';
 import useOrders from './Hooks/useOrders';
 import useCurrency from './Hooks/useCurrency';
@@ -38,6 +39,7 @@ const checkout = useCheckout();
         <Cart { ...openCartHook } { ...orders } { ...currency } {...deleted} {...checkout}/>
       </Grid>      
     </Grid>
+    <Footer/>
     </>
   );
 }
