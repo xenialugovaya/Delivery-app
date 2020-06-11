@@ -43,7 +43,7 @@ function TextMaskCustom(props) {
   );
 }
 
-export default function Checkout({setCheckout}){
+export default function Checkout({setCheckout, setOrders}){
 
   const [formData, setFormData] = React.useState({'userName': '', 'userSurname': '', 'address': '', 'phone': '', 'submitted': false});
   
@@ -76,6 +76,7 @@ export default function Checkout({setCheckout}){
     if (!formData.error){
       formData.submitted = true;
       setFormData({...formData})
+      setOrders([]);
     }
   };
 

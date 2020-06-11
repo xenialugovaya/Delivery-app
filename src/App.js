@@ -28,7 +28,7 @@ const checkout = useCheckout();
     <Grid container>
         {checkout.checkout 
           ? <Grid item xs={ 7 }>
-              <Checkout {...checkout}/>
+              <Checkout {...checkout} { ...orders }/>
             </Grid>
           : <Grid item xs={ menuGrid }>
               <Menu orders={ orders } currency={currency} deleted={deleted}/>
