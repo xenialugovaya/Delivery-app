@@ -11,8 +11,7 @@ import useOrders from './Hooks/useOrders';
 import useCurrency from './Hooks/useCurrency';
 import useItemDelete from './Hooks/useItemDelete';
 import useCheckout from './Hooks/useCheckout';
-
-
+import useTitle from './Hooks/useTitle';
 
 function App() {
 const currency = useCurrency();
@@ -21,6 +20,7 @@ const { menuGrid, cartGrid } = openCartHook.openCart;
 const orders = useOrders();
 const deleted = useItemDelete();
 const checkout = useCheckout();
+useTitle({...orders, ...checkout});
 
   return (
     <>
