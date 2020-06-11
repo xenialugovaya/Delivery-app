@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Logo from '../Logo/Logo';
 
 const FooterStyle = styled.footer`
+    width: 100%;
     background: white;
     flex: 0 0 auto;
 `;

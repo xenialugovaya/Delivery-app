@@ -9,16 +9,32 @@ import { menuItems } from '../Data/Data';
  
 
 const MenuStyle = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 120px 60px;
+  @media (max-width: 700px) {
+    padding: 120px 0px;
+    align-items: center;
+  }
 `
 const MenuChips = styled.div`
   padding: 20px;
 `
 
+const MenuSection = styled.div`
+  
+`
+
 const useStyles = makeStyles(() => ({
-  section: {
+  sectionTitle: {
    marginTop: '40px',
    marginBottom: '10px',
+  },
+  section: {
+    '@media (max-width: 700px)': {
+      display: 'flex',
+      flexDirection: 'column',
+    },
   },
   chip: {
     margin: '5px',
@@ -51,11 +67,11 @@ export default function Menu({orders, currency, deleted}) {
           ))}
         </MenuChips>  
         {Object.entries(menuItems).map(([sectionName, foods], sectionIndex) => (
-          <>
-            <Typography id={sectionName} className={classes.section} variant="h4" component="h3">
+          <MenuSection>
+            <Typography id={sectionName} className={classes.sectionTitle} variant="h4" component="h3">
               {sectionName}
             </Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.section}>
               {foods.map((item, itemIndex) => {
                 const generatedIndex = parseInt(String(sectionIndex) + String(itemIndex));
                 return(
@@ -64,8 +80,8 @@ export default function Menu({orders, currency, deleted}) {
                   </Grid> 
                   )
                 })}    
-        </Grid>
-          </>
+            </Grid>
+          </MenuSection>
         ))}
         
       </MenuStyle>

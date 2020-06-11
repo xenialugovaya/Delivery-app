@@ -106,6 +106,14 @@ export const foodItems = [{
     section: 'Burgers',
   },
   {
+    title: 'Cheese Burger',
+    priceUSD: 10.99,
+    shortDescription: 'Cheese Burger',
+    description: '',
+    image: `${imagePath}bison-burger.jpg`,
+    section: 'Burgers',
+  },
+  {
     title: 'Best Bison Burger',
     priceUSD: 10.99,
     shortDescription: 'With the typical ground beef',
