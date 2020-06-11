@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Badge} from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Badge, IconButton} from '@material-ui/core';
+import { AddShoppingCart } from '@material-ui/icons';
 import CurrencySwitcher from '../CurrencySwitcher/CurrencySwitcher';
 import Logo from '../Logo/Logo';
 
@@ -13,6 +12,7 @@ const NavbarStyle = styled.div`
   left:0px;
   background: white;
   padding: 15px 25px;
+  height: 72px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,8 @@ export const LogoStyle = styled.div`
 `;
 
 const NavMenu = styled.div`
+  display: flex;
+  align-items: center;
   border-left: 1px solid grey;
   padding-left: 25px;
 `;
@@ -48,11 +50,11 @@ export default function Navbar({setOpenCart, orders, currency}){
         <LogoStyle>
           <Logo/>
         </LogoStyle>
-        <CurrencySwitcher {...currency}/>
         <NavMenu>
+          <CurrencySwitcher {...currency}/>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={handleCartClick}>
             <Badge badgeContent={amount} color="secondary">
-              <AddShoppingCartIcon />
+              <AddShoppingCart/>
             </Badge>
           </IconButton>
         </NavMenu>

@@ -1,28 +1,37 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import { TextField, MenuItem } from '@material-ui/core';
 import { currencies } from '../Data/Data';
 
-  export default function CurrencySwitcher({currency, setCurrency}){
+const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.down('xs')]: {
+      width: '35%',
+    },
+  },
+}));
 
-    const handleChange = (event) => {
-        setCurrency(event.target.value);
-    };
+export default function CurrencySwitcher({currency, setCurrency}){
+  const classes = useStyles();
 
-    return(
-        <TextField
-          id="standard-select-currency"
-          select
-          value={currency}
-          onChange={handleChange}
-          helperText="Please select your currency"
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-    );
+  const handleChange = (event) => {
+    setCurrency(event.target.value);
+  };
 
-  }
+  return(
+    <TextField
+      className={classes.root}
+      id="standard-select-currency"
+      select
+      value={currency}
+      onChange={handleChange}
+    >
+      {currencies.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
+    </TextField>
+  );
+
+}

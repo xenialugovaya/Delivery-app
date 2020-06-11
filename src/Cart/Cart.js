@@ -1,18 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import { Button } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { Divider } from '@material-ui/core';
-import ListItem from '@material-ui/core/ListItem';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
-import { formatUSDPrice, formatEURPrice } from '../Data/Data';
-import { deliveryCost } from '../Data/Data';
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardHeader, CardContent, Button, IconButton, Typography, Divider, ListItem } from '@material-ui/core';
+import { HighlightOff, Close } from '@material-ui/icons';
+import { formatUSDPrice, formatEURPrice, deliveryCost } from '../Data/Data';
 
 const useStyles = makeStyles({
   root: {
@@ -42,24 +33,42 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between'
   },
+  itemTitle:{
+    margin: '0px 10px',
+    minWidth: '90px',
+  },
   subtotal: {
     background: '#eee',
-  }
+  },
+  quantity: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  price: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
 
 function getPrice(order){
   return order.priceUSD * order.quantity;
 }
 
-export default function Cart({openCart, setOpenCart, orders, setOrders, currency, deletedItemIndex, setDeletedItemIndex, checkout, setCheckout}) {
+export default function Cart({openCartHook, ordersHook, currency, deletedHook, checkoutHook}) {
+  const {openCart, setOpenCart} = openCartHook;
+  const { cartOpen } = openCart;
+  const {orders, setOrders} = ordersHook;
+  const {deletedItemIndex, setDeletedItemIndex} = deletedHook;
+  const {checkout, setCheckout} = checkoutHook;
+
   const subtotal = orders.reduce((total, order) => {
     return total + getPrice(order);
   }, 0);
   const total = subtotal + deliveryCost;
-  const { cartOpen } = openCart;
+  
   const classes = useStyles();
 
-  const deleteItem = (index) => {
+  const handleDeleteClick = (index) => {
     const orderId = orders[index].id;
     setDeletedItemIndex([...deletedItemIndex, orderId]);
     const newOrders = [...orders];
@@ -68,14 +77,15 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
   };
 
   const handleCloseClick = () => {
-    setOpenCart({cartOpen: false});
+    setOpenCart({menuGrid: 12, checkoutGrid: 12, cartOpen: false});
   };
 
-  const handleButtonClick = () => {
+  const handleProceedToCheckoutClick = () => {
     setCheckout(true);
+    setOpenCart({checkoutGrid: 12, cartOpen: false});
   };
 
-     return(
+    return(
       <Card className={clsx(classes.root, {
         [classes.open]: cartOpen,
       })}>
@@ -83,7 +93,7 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
          title="Your order"
          action={
           <IconButton aria-label="close" onClick={handleCloseClick}>
-            <HighlightOffIcon />
+            <HighlightOff />
           </IconButton>
           } 
         />       
@@ -96,27 +106,31 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
             : <>
                 <CardContent className={classes.content}>
                   {orders.map((order, index) => (
-                    <>
-                    <ListItem className={classes.list}>
-                    <Typography variant="overline">
-                        {order.quantity} 
-                      </Typography>   
-                      <Typography variant="overline">
-                        {order.title} 
-                      </Typography>  
-                      <Typography variant="overline">
-                        {
-                          currency === 'USD'
-                          ? formatUSDPrice(getPrice(order))
-                          : formatEURPrice(getPrice(order))
-                        } 
-                      </Typography> 
-                      <IconButton onClick={() => deleteItem(index)}>
-                        <CloseIcon/>
-                      </IconButton>
-                   </ListItem> 
-                   <Divider/>
-                   </>
+                    <div key={index}>
+                      <ListItem className={classes.list}>
+                        <div className={classes.quantity}>
+                          <Typography variant="overline">
+                            {order.quantity} 
+                          </Typography>   
+                          <Typography className={classes.itemTitle} variant="caption">
+                            {order.title} 
+                          </Typography>
+                        </div>  
+                        <div className={classes.price}>
+                          <Typography variant="overline">
+                            {
+                              currency === 'USD'
+                                ? formatUSDPrice(getPrice(order))
+                                : formatEURPrice(getPrice(order))
+                            } 
+                          </Typography> 
+                          <IconButton onClick={() => handleDeleteClick(index)}>
+                            <Close fontSize="small"/>
+                          </IconButton>
+                        </div>
+                    </ListItem> 
+                    <Divider/>
+                   </div>
                   ))}
                   <ListItem className={clsx(classes.list, classes.subtotal)}>
                     <Typography variant="overline">
@@ -157,7 +171,7 @@ export default function Cart({openCart, setOpenCart, orders, setOrders, currency
                 </CardContent>
                 {
                   !checkout &&
-                  <Button variant="contained" color="primary" className={classes.button} onClick={handleButtonClick}>
+                  <Button variant="contained" color="primary" className={classes.button} onClick={handleProceedToCheckoutClick}>
                     Proceed to checkout
                   </Button> 
                 }
