@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     right: '0px',
     display: 'none',
     flexDirection: 'column',
+    zIndex: 1000,
   },
   button: {
     maxWidth: '300px',

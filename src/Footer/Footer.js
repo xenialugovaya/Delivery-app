@@ -6,6 +6,7 @@ import Logo from '../Logo/Logo';
 
 const FooterStyle = styled.footer`
     background: white;
+    flex: 0 0 auto;
 `;
 
 const FooterMenu = styled.div`

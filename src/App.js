@@ -1,5 +1,6 @@
 import React from 'react';
 import { GlobalStyle } from './Styles/GlobalStyle'
+import { Content } from './Styles/Content'
 import { Grid } from '@material-ui/core';
 import Navbar from './Navbar/Navbar';
 import Menu from './Menu/Menu';
@@ -16,7 +17,7 @@ import useTitle from './Hooks/useTitle';
 function App() {
 const currency = useCurrency();
 const openCartHook = useOpenCart();
-const { menuGrid, cartGrid } = openCartHook.openCart;
+const { menuGrid, checkoutGrid, cartGrid } = openCartHook.openCart;
 const orders = useOrders();
 const deleted = useItemDelete();
 const checkout = useCheckout();
@@ -26,9 +27,10 @@ useTitle({...orders, ...checkout});
     <>
     <GlobalStyle/>
     <Navbar { ...openCartHook } { ...orders } currency={currency}/>
+    <Content>
     <Grid container>
         {checkout.checkout 
-          ? <Grid item xs={ 7 }>
+          ? <Grid item xs={ checkoutGrid }>
               <Checkout {...checkout} { ...orders }/>
             </Grid>
           : <Grid item xs={ menuGrid }>
@@ -39,7 +41,8 @@ useTitle({...orders, ...checkout});
         <Cart { ...openCartHook } { ...orders } { ...currency } {...deleted} {...checkout}/>
       </Grid>      
     </Grid>
-    <Footer/>
+    </Content>
+    <Footer/> 
     </>
   );
 }

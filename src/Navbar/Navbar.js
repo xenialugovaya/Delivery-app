@@ -16,7 +16,8 @@ const NavbarStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 15px 10px -15px #111;    
+  box-shadow: 0px 15px 10px -15px #111; 
+  z-index: 1000;   
 `;
 
 export const LogoStyle = styled.div`
@@ -39,7 +40,7 @@ export default function Navbar({setOpenCart, orders, currency}){
   }
   
   const handleCartClick = () => {
-    setOpenCart({menuGrid: 10, cartGrid: 2, cartOpen: true});
+    setOpenCart({menuGrid: 10, checkoutGrid: 8, cartGrid: 2, cartOpen: true});
   };
 
     return (
