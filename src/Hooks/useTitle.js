@@ -7,12 +7,11 @@ export default function useTitle({orders, checkout}){
       amount += order.quantity;
     });
   }
-    useEffect(() => {
-      if(!checkout){
-        document.title = orders.length === 0 ? "Pizza delivery" : `[${amount}] items in your cart`;
-      } else {
-        document.title = "Checkout";
-      }
-        
-    });
+  useEffect(() => {
+    if(!checkout){
+      document.title = orders.length === 0 ? "Pizza delivery" : `[${amount}] items in your cart`;
+    } else {
+      document.title = "Checkout";
+    }        
+  });
 }

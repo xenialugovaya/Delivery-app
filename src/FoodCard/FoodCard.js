@@ -1,16 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardHeader, CardMedia, CardContent, CardActions } from '@material-ui/core';
+import { Collapse, IconButton, Typography }  from '@material-ui/core';
+import { AddCircle, ExpandMore } from '@material-ui/icons';
 import QuantityInput from '../QuantityInput/QuantityInput';
 import useQuantity from '../Hooks/useQuantity';
 import useCardExpand from '../Hooks/useCardExpand';
@@ -40,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FoodCard({index, parameters, setOrders, orders, currency, deletedItemIndex, setDeletedItemIndex}) {
-  const {title, priceUSD, shortDescription, description, image} = parameters;
+export default function FoodCard({index, parameters, ordersHook, currency, deletedHook}) {
+  const { title, priceUSD, shortDescription, description, image } = parameters;
+  const { setOrders, orders } = ordersHook;
+  const { deletedItemIndex, setDeletedItemIndex } = deletedHook;
   const quantity = useQuantity();
   const { cardExpand, setCardExpand } = useCardExpand();
   const order = {
@@ -99,10 +94,10 @@ export default function FoodCard({index, parameters, setOrders, orders, currency
       <CardActions disableSpacing>
         {
         !addToCartClicked || deletedItemIndex.find(clicked => clicked === index) !== undefined
-        ? <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
-            <AddCircleIcon fontSize="large" color="primary" />
-          </IconButton>
-        : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
+          ? <IconButton aria-label="add to cart" onClick={handleAddToCartClick}>
+              <AddCircle fontSize="large" color="primary"/>
+            </IconButton>
+          : <QuantityInput quantity={quantity} onClick={handleQuantityClick}/>
         }
         <Typography>
           { currency === 'USD'
@@ -118,7 +113,7 @@ export default function FoodCard({index, parameters, setOrders, orders, currency
           aria-expanded={cardExpand}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+          <ExpandMore/>
         </IconButton>
       </CardActions>
       <Collapse in={cardExpand} timeout="auto" unmountOnExit>

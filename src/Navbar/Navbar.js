@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import {Badge} from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Badge, IconButton} from '@material-ui/core';
+import { AddShoppingCart } from '@material-ui/icons';
 import CurrencySwitcher from '../CurrencySwitcher/CurrencySwitcher';
 import Logo from '../Logo/Logo';
 
@@ -55,7 +54,7 @@ export default function Navbar({setOpenCart, orders, currency}){
           <CurrencySwitcher {...currency}/>
           <IconButton color="primary" aria-label="add to shopping cart" onClick={handleCartClick}>
             <Badge badgeContent={amount} color="secondary">
-              <AddShoppingCartIcon />
+              <AddShoppingCart/>
             </Badge>
           </IconButton>
         </NavMenu>
