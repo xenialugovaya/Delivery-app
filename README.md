@@ -1,6 +1,6 @@
 ## Pizza Delivery App
 
-See <a href=" https://xenialugovaya.github.io/Delivery-app/">published page</a> 
+See <a href="https://xenialugovaya.github.io/Delivery-app/">published page</a> 
 
 ## Libraries used
 
@@ -35,5 +35,5 @@ The build is minified and the filenames include the hashes.
 
 ### `npm run deploy`
 
-This command first runs 'npm run build' and builds app for production, after that it runs 'gh-pages -d build' to publish on gh-pages
+This command first runs `npm run build` and builds app for production, after that it runs `gh-pages -d build` to publish on gh-pages
 
