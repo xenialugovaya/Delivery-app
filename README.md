@@ -1,6 +1,6 @@
 ## Pizza Delivery App
 
-See <a href=" https://xenialugovaya.github.io/Delivery-app/">published page</a> 
+See <a href="https://xenialugovaya.github.io/Delivery-app/">published page</a> 
 
 ## Libraries used
 
